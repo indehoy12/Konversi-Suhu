@@ -1,55 +1,60 @@
 let isReverse = false;
 
-// variable c-to-f
-var celciusInput = document.getElementById("celcius-input");
-var fahrenheitResult = document.getElementById("fahrenheit-result");
-var fahrenheitCalculate = document.getElementById("fahrenheit-calculate");
+const celciusInput = document.getElementById("celcius-input");
+const fahrenheitResult = document.getElementById("fahrenheit-result");
+const fahrenheitCalculate = document.getElementById("fahrenheit-calculate");
 
-// variable f-to-c
-var fahrenheitInput = document.getElementById("fahrenheit-input");
-var celciusResult = document.getElementById("celcius-result");
-var celciusCalculate = document.getElementById("celcius-calculate");
+const fahrenheitInput = document.getElementById("fahrenheit-input");
+const celciusResult = document.getElementById("celcius-result");
+const celciusCalculate = document.getElementById("celcius-calculate");
 
 function convert() {
   if (isReverse) {
     if (fahrenheitInput.value === "") {
-      alert("input fahrenheit can't be empty");
+      alert("Input Fahrenheit tidak boleh kosong!");
     } else {
-      let result = Number(fahrenheitInput.value - 32) / 1.8;
-      celciusResult.innerHTML = result;
-      celciusCalculate.innerHTML = `(${fahrenheitInput.value}&deg;F - 32) / 1.8 = ${result}&deg;C`
+      const f = Number(fahrenheitInput.value);
+      const c = (f - 32) / 1.8;
+      celciusResult.value = c.toFixed(2);
+      celciusCalculate.value = `(${f}°F - 32) / 1.8 = ${c.toFixed(2)}°C`;
     }
   } else {
     if (celciusInput.value === "") {
-      alert("input celcius can't be empty");
+      alert("Input Celcius tidak boleh kosong!");
     } else {
-      let result = Number(celciusInput.value * 1.8) + 32;
-      fahrenheitResult.innerHTML = result; 
-      fahrenheitCalculate.innerHTML =`(${celciusInput.value}&deg;C x 1.8) + 32 = ${result}&deg;F`
+      const c = Number(celciusInput.value);
+      const f = (c * 1.8) + 32;
+      fahrenheitResult.value = f.toFixed(2);
+      fahrenheitCalculate.value = `(${c}°C × 1.8) + 32 = ${f.toFixed(2)}°F`;
     }
   }
 }
 
 function reset() {
-  celciusInput.innerHTML = "";
-  fahrenheitResult.innerHTML = "";
-  fahrenheitCalculate.innerHTML = "";
-  fahrenheitInput.innerHTML = "";
-  celciusResult.innerHTML = "";
-  celciusCalculate.innerHTML = "";
+  celciusInput.value = "";
+  fahrenheitResult.value = "";
+  fahrenheitCalculate.value = "";
+  fahrenheitInput.value = "";
+  celciusResult.value = "";
+  celciusCalculate.value = "";
 }
 
 function reverse() {
   reset();
-  var cToF = document.getElementById("c-to-f");
-  var fToC = document.getElementById("f-to-c");
+  const cToF = document.getElementById("c-to-f");
+  const fToC = document.getElementById("f-to-c");
   isReverse = !isReverse;
 
   if (isReverse) {
-    fToC.style.display = "block";
-    cToF.style.display = "none";
+    fToC.classList.add("active");
+    cToF.classList.remove("active");
   } else {
-    cToF.style.display = "block";
-    fToC.style.display = "none";
+    cToF.classList.add("active");
+    fToC.classList.remove("active");
   }
 }
+
+window.onload = () => {
+  document.getElementById("c-to-f").classList.add("active");
+};
+
